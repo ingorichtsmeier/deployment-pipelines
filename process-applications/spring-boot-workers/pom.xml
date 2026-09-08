@@ -18,7 +18,7 @@
   <description>Camunda 8.8 process application with a Spring Boot job worker</description>
 
   <properties>
-    <java.version>17</java.version>
+    <java.version>25</java.version>
     <!-- Bump to the latest 8.8.x patch release as needed -->
     <camunda.version>8.8.13</camunda.version>
   </properties>
