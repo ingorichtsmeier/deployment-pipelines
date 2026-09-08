@@ -1,0 +1,5 @@
+# Build output (Maven, and anything else using a "target" folder), at any depth
+**/target/
+
+# macOS Finder metadata, at any depth
+**/.DS_Store

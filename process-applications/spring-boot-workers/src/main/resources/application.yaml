@@ -1,0 +1,13 @@
+camunda:
+  client:
+    # Overridable via env vars so the same image can be promoted from dev to qa
+    # (see the dev/qa GitHub Environments in deployment-pipeline.md).
+    mode: ${CAMUNDA_CLIENT_MODE:self-managed}
+    auth:
+      method: ${CAMUNDA_AUTH_METHOD:none}
+    rest-address: ${CAMUNDA_REST_ADDRESS:http://localhost:8080}
+    grpc-address: ${CAMUNDA_GRPC_ADDRESS:http://localhost:26500}
+
+logging:
+  level:
+    com.example.springbootworkers: INFO
