@@ -3,3 +3,8 @@
 
 # macOS Finder metadata, at any depth
 **/.DS_Store
+
+# Eclipse project metadata, at any depth
+**/.classpath
+**/.project
+**/.settings/
