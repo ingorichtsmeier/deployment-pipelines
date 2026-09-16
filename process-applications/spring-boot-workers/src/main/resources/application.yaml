@@ -4,9 +4,9 @@ camunda:
     # (see the dev/qa GitHub Environments in deployment-pipeline.md).
     mode: ${CAMUNDA_CLIENT_MODE:self-managed}
     auth:
-      method: ${CAMUNDA_AUTH_METHOD:none}
-    rest-address: ${CAMUNDA_REST_ADDRESS:http://localhost:8080}
-    grpc-address: ${CAMUNDA_GRPC_ADDRESS:http://localhost:26500}
+      method: ${CAMUNDA_CLIENT_AUTH_METHOD:none}
+    rest-address: ${CAMUNDA_CLIENT_RESTADDRESS:http://localhost:8080}
+    grpc-address: ${CAMUNDA_CLIENT_GRPCADDRESS:http://localhost:26500}
 
 logging:
   level:

@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-boot-workers
+  namespace: ${NAMESPACE}
+  labels:
+    app: spring-boot-workers
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-boot-workers
+  template:
+    metadata:
+      labels:
+        app: spring-boot-workers
+    spec:
+      containers:
+        - name: spring-boot-workers
+          image: ${IMAGE}
+          ports:
+            - containerPort: 8080
+          env:
+            - name: CAMUNDA_CLIENT_MODE
+              value: self-managed
+            - name: CAMUNDA_CLIENT_AUTH_METHOD
+              value: oidc
+            - name: CAMUNDA_CLIENT_AUTH_TOKENURL
+              value: http://keycloak.camunda.svc.cluster.local:18080/realms/ingo-keycloak-as-oidc/protocol/openid-connect/token
+            - name: CAMUNDA_CLIENT_AUTH_AUDIENCE
+              value: camunda-orchestration
+            - name: CAMUNDA_CLIENT_AUTH_CLIENTID
+              valueFrom:
+                secretKeyRef:
+                  name: spring-boot-workers-camunda-client
+                  key: client-id
+            - name: CAMUNDA_CLIENT_AUTH_CLIENTSECRET
+              valueFrom:
+                secretKeyRef:
+                  name: spring-boot-workers-camunda-client
+                  key: client-secret
+            - name: CAMUNDA_CLIENT_RESTADDRESS
+              value: http://camunda-zeebe-gateway.camunda.svc.cluster.local:8080
+            - name: CAMUNDA_CLIENT_GRPCADDRESS
+              value: http://camunda-zeebe-gateway.camunda.svc.cluster.local:26500
