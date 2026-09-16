@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_spring-boot-pipeline-example" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.50.1" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.8.0">
-  <bpmn:process id="spring-boot-pipeline-example" name="Spring Boot Pipeline Example" isExecutable="true"><bpmn:extensionElements><zeebe:versionTag value="1.0"></zeebe:versionTag></bpmn:extensionElements>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_spring-boot-pipeline-example" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Web Modeler" exporterVersion="50ea9fa" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.8.0">
+  <bpmn:process id="spring-boot-pipeline-example" name="Spring Boot Pipeline Example" isExecutable="true">
+    <bpmn:extensionElements>
+      <zeebe:versionTag value="1.1" />
+    </bpmn:extensionElements>
     <bpmn:startEvent id="StartEvent_1" name="Test requested">
       <bpmn:outgoing>Flow_1</bpmn:outgoing>
     </bpmn:startEvent>
@@ -12,10 +15,18 @@
       <bpmn:outgoing>Flow_2</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:endEvent id="EndEvent_1" name="Test completed">
-      <bpmn:incoming>Flow_2</bpmn:incoming>
+      <bpmn:incoming>Flow_1fvupns</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_1" sourceRef="StartEvent_1" targetRef="ServiceTask_Worker1" />
-    <bpmn:sequenceFlow id="Flow_2" sourceRef="ServiceTask_Worker1" targetRef="EndEvent_1" />
+    <bpmn:sequenceFlow id="Flow_2" sourceRef="ServiceTask_Worker1" targetRef="Activity_1bwne98" />
+    <bpmn:sequenceFlow id="Flow_1fvupns" sourceRef="Activity_1bwne98" targetRef="EndEvent_1" />
+    <bpmn:userTask id="Activity_1bwne98" name="Check variables">
+      <bpmn:extensionElements>
+        <zeebe:userTask />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_2</bpmn:incoming>
+      <bpmn:outgoing>Flow_1fvupns</bpmn:outgoing>
+    </bpmn:userTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="spring-boot-pipeline-example">
@@ -29,10 +40,14 @@
         <omgdc:Bounds x="240" y="80" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="EndEvent_1_di" bpmnElement="EndEvent_1">
-        <omgdc:Bounds x="392" y="102" width="36" height="36" />
+        <omgdc:Bounds x="512" y="102" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="373" y="138" width="74" height="14" />
+          <omgdc:Bounds x="493" y="138" width="74" height="14" />
         </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1nsjpz7_di" bpmnElement="Activity_1bwne98">
+        <omgdc:Bounds x="370" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
         <omgdi:waypoint x="188" y="120" />
@@ -40,7 +55,11 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
         <omgdi:waypoint x="340" y="120" />
-        <omgdi:waypoint x="392" y="120" />
+        <omgdi:waypoint x="370" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1fvupns_di" bpmnElement="Flow_1fvupns">
+        <omgdi:waypoint x="470" y="120" />
+        <omgdi:waypoint x="512" y="120" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
