@@ -7,6 +7,8 @@ import io.camunda.client.CamundaClient;
 import io.camunda.client.api.response.ProcessInstanceEvent;
 import io.camunda.process.test.api.CamundaProcessTestContext;
 import io.camunda.process.test.api.CamundaSpringProcessTest;
+import io.camunda.process.test.api.assertions.UserTaskSelectors;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -32,6 +34,8 @@ class SpringBootPipelineExampleProcessTest {
             .send()
             .join();
 
+    assertThat(processInstance).isActive();
+    processTestContext.completeUserTask(UserTaskSelectors.byTaskName("Check variables"));
     assertThat(processInstance).isCompleted();
     assertThat(processInstance)
         .hasVariableSatisfies(
