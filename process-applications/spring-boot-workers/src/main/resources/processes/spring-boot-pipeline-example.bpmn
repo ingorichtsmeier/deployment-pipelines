@@ -2,7 +2,7 @@
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_spring-boot-pipeline-example" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Web Modeler" exporterVersion="50ea9fa" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.8.0">
   <bpmn:process id="spring-boot-pipeline-example" name="Spring Boot Pipeline Example" isExecutable="true">
     <bpmn:extensionElements>
-      <zeebe:versionTag value="1.2" />
+      <zeebe:versionTag value="1.3" />
     </bpmn:extensionElements>
     <bpmn:startEvent id="StartEvent_1" name="Test requested">
       <bpmn:outgoing>Flow_1</bpmn:outgoing>
@@ -24,16 +24,24 @@
       <bpmn:extensionElements>
         <zeebe:userTask />
       </bpmn:extensionElements>
-      <bpmn:incoming>Flow_0pbjy1z</bpmn:incoming>
+      <bpmn:incoming>Flow_1sfywnu</bpmn:incoming>
       <bpmn:outgoing>Flow_1fvupns</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:sequenceFlow id="Flow_0pbjy1z" sourceRef="Activity_0o25rg8" targetRef="Activity_1bwne98" />
+    <bpmn:sequenceFlow id="Flow_0pbjy1z" sourceRef="Activity_0o25rg8" targetRef="Activity_10tq4jn" />
     <bpmn:serviceTask id="Activity_0o25rg8" name="Worker 2">
       <bpmn:extensionElements>
         <zeebe:taskDefinition type="worker2" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_2</bpmn:incoming>
       <bpmn:outgoing>Flow_0pbjy1z</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_1sfywnu" sourceRef="Activity_10tq4jn" targetRef="Activity_1bwne98" />
+    <bpmn:serviceTask id="Activity_10tq4jn" name="Worker 3">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="worker3" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0pbjy1z</bpmn:incoming>
+      <bpmn:outgoing>Flow_1sfywnu</bpmn:outgoing>
     </bpmn:serviceTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
@@ -47,18 +55,21 @@
       <bpmndi:BPMNShape id="ServiceTask_Worker1_di" bpmnElement="ServiceTask_Worker1">
         <omgdc:Bounds x="240" y="80" width="100" height="80" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_03i1hc1_di" bpmnElement="Activity_0o25rg8">
+        <omgdc:Bounds x="390" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="EndEvent_1_di" bpmnElement="EndEvent_1">
-        <omgdc:Bounds x="682" y="102" width="36" height="36" />
+        <omgdc:Bounds x="832" y="102" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="663" y="138" width="74" height="14" />
+          <omgdc:Bounds x="813" y="138" width="74" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1nsjpz7_di" bpmnElement="Activity_1bwne98">
-        <omgdc:Bounds x="540" y="80" width="100" height="80" />
+        <omgdc:Bounds x="690" y="80" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_03i1hc1_di" bpmnElement="Activity_0o25rg8">
-        <omgdc:Bounds x="390" y="80" width="100" height="80" />
+      <bpmndi:BPMNShape id="Activity_09vph38_di" bpmnElement="Activity_10tq4jn">
+        <omgdc:Bounds x="540" y="80" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
         <omgdi:waypoint x="188" y="120" />
@@ -69,12 +80,16 @@
         <omgdi:waypoint x="390" y="120" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1fvupns_di" bpmnElement="Flow_1fvupns">
-        <omgdi:waypoint x="640" y="120" />
-        <omgdi:waypoint x="682" y="120" />
+        <omgdi:waypoint x="790" y="120" />
+        <omgdi:waypoint x="832" y="120" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0pbjy1z_di" bpmnElement="Flow_0pbjy1z">
         <omgdi:waypoint x="490" y="120" />
         <omgdi:waypoint x="540" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1sfywnu_di" bpmnElement="Flow_1sfywnu">
+        <omgdi:waypoint x="640" y="120" />
+        <omgdi:waypoint x="690" y="120" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
